@@ -14,9 +14,10 @@ class ShowXkcd(BotPlugin):
 
     def callback_message(self, conn, mess):
         body = mess.getBody().lower()
-        if body.find('http://xkcd.com') or body.find('http://www.xkcd.com'):
+        search = re.search("(?P<url>https?://[www.]?[^\s]+)", body)
+        if search:
             logging.info('found xkcd link')
-            url = re.search("(?P<url>https?://[^\s]+)", body).group("url")
+            url = search.group("url")
             logging.info('xkcd url: %s' % url)
             image, wisdom = self.get_image_and_wisdom(url)
             self.send(
