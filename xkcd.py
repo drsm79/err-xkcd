@@ -7,7 +7,7 @@ from BeautifulSoup import BeautifulSoup
 
 class ShowXkcd(BotPlugin):
     def get_image_and_wisdom(self, url):
-        response = requests.get(url).text
+        response = requests.get(url)
         soup = BeautifulSoup(response.text)
         img = soup.first('div', {'id': 'comic'}).first('img')
         return img['src'], img['title']
