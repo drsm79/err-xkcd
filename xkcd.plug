@@ -1,0 +1,6 @@
+[Core]
+Name = ShowXkcd
+Module = xkcd
+
+[Documentation]
+Description = Show the image and alt text when someone links to xkcd
