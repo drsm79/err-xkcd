@@ -1,7 +1,7 @@
 import logging
 import re
 import requests
-from errbot import BotPlugin
+from errbot import BotPlugin, botcmd
 from BeautifulSoup import BeautifulSoup
 
 
@@ -29,3 +29,18 @@ class ShowXkcd(BotPlugin):
                 '"%s"' % wisdom,
                 message_type='groupchat'
             )
+
+    @botcmd
+    def xkcd(self, mess, args):
+        random_url = 'http://dynamic.xkcd.com/random/comic/'
+        image, wisdom = self.get_image_and_wisdom(random_url)
+        self.send(
+            mess.getFrom(),
+            image,
+            message_type='groupchat'
+        )
+        self.send(
+            mess.getFrom(),
+            '"%s"' % wisdom,
+            message_type='groupchat'
+        )
